@@ -1,0 +1,35 @@
+{% extends 'base2.html' %}
+
+{% block headers %}
+<link rel="stylesheet" href="static/css/quiz.css" media="screen">
+{% endblock %}
+
+{% block scripts %}
+<script src="static/js/quiz.js"></script>
+<script src="static/js/who.js"></script>
+{% endblock %}
+
+
+{% block content %}
+<div id="quiz">
+    <form id="whoForm" method="post">
+        <div class="question">
+            <div class="question-header">Name:</div>
+            <div class="answers">
+                <div>
+                    <input type="text" id="name" name="name" required>
+                </div>
+            </div>
+        </div>
+        <div class="question">
+            <div class="question-header">Surname:</div>
+            <div class="answers">
+                <div>
+                    <input type="text" id="surname" name="surname" required>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<button type="button" onclick="storeIdentity()">Submit</button>
+{% endblock %}

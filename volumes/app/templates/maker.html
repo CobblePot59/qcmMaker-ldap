@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block headers %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/maker.css') }}" media="screen">
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/maker.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+<form id="quiz-form" action="" method="post">
+	<label for="quiz-name">Quizz name :</label>
+	<input type="text" id="quiz-name" name="quiz-name" required/>
+	<div class="button-container">
+		<label for="question-type">Question type :</label>
+		<div style="display:flex">
+			<select id="question-type">
+				<option value="unique">Single answer</option>
+				<option value="multiple">Multiple answer</option>
+				<option value="text">Text answer</option>
+			</select>
+			<button type="button" id="add-question">+</button>
+		</div>
+	</div>
+
+	<div id="questions-container"></div>
+
+	<input type="hidden" name="quiz-json-data" id="quiz-json-data">
+    <input type="hidden" name="quiz-html-data" id="quiz-html-data">
+
+	<button type="submit" id="generate-button">Generate Quiz</button>
+</form>
+{% endblock %}

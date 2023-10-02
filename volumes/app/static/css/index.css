@@ -1,0 +1,28 @@
+body{margin: 0}
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 15px;
+}
+
+.container img {
+  width: 100%;
+  display: block;
+}
+
+.container img:hover {
+  transform: scale(1.04);
+}
+
+#plus-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+}
+
+.text-right {
+  text-align: right;
+  margin-top: 20px;
+}

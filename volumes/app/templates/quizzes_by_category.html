@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% include 'navbar.html' %}
+
+{% block headers %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/quizzes_by_category.css') }}" media="screen">
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/quizzes_by_category.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+
+<table id="data" class="table table-striped" style="width:100%">
+    <thead>
+        <tr>
+            <th>Quizzes</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in range(quizzes|length) %}
+            <tr>
+                <td>{{ quizzes[i] }}</td>
+                <td>
+                    <a href="#play" onclick="playQuiz('{{ quizzes[i] }}')"><i class="bi bi-eye" style="color: green;"></i></a>
+                    <a href="#copy" onclick="copyURL('{{ quizzes[i] }}')"><i class="bi bi-clipboard"></i></a>
+                    <a href="#delete" onclick="deleteQuiz('{{ quizzes[i] }}')"><i class="bi bi-trash" style="color: red;"></i></a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a class="btn btn-dark" href="/maker/{{ category }}" id="add-button">+</a>
+{% endblock %}

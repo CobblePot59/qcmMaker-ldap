@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% include 'navbar.html' %}
+
+{% block headers %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+{% endblock %}
+
+{% block content %}
+{% for i in range(categories|length) %}
+<div>
+    <a href="/by_category/{{ categories[i] }}"><img src="{{ url_for('static', filename='img/folder.png') }}"></a>
+    <span>
+      {{ categories[i] }}
+      <a href="#edit" data-bs-toggle="modal" data-anchor-category-name="{{ categories[i] }}"><i class="bi bi-pencil-square"></i></a>
+      <a href="#delete" onclick="deleteCategory('{{ categories[i] }}')"><i class="bi bi-trash" style="color: red;"></i></a>
+    </span>
+</div>
+{% endfor %}
+
+<div id="add" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Add category</h4>
+          <a href=""  style="text-decoration: none;" data-bs-dismiss="modal">X</a>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+          <!-- Add your form or content here -->
+          <form action="" method="post">
+            <div class="form-group">
+              <label for="category">Category :</label>
+              <input type="text" class="form-control" id="category" name="category" required>
+            </div>
+            <div class="text-right">
+                <button type="submit" class="btn btn-dark">Submit</button>
+            </div>
+          </form>
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer"></div>  
+      </div>
+    </div>
+</div>
+
+<div id="edit" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Edit category</h4>
+        <a href=""  style="text-decoration: none;" data-bs-dismiss="modal">X</a>
+      </div>
+      
+      <!-- Modal body -->
+      <div class="modal-body">
+        <!-- Add your form or content here -->
+        <form id="editCategoryForm">
+          <div class="form-group">
+            <label for="ecategory">Category :</label>
+            <input type="text" class="form-control" id="modal-category-name" name="modal-category-name" required>
+          </div>
+          <div class="text-right">
+            <button type="button" class="btn btn-dark" onclick="updateCategory()">Submit</button>
+          </div>
+        </form>
+      </div>
+      
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <span id="span-category-name" style="display: none;"></span>
+      </div>  
+    </div>
+  </div>
+</div>
+
+<div id="plus-button">
+    <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#add">+</button>
+</div>
+{% endblock %}

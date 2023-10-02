@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  app:
+    build: BUILD
+    image: qcmmaker
+    container_name: qcmMaker
+    restart: always
+    volumes:
+        - ./volumes/app:/opt/qcmMaker
+    environment:
+      - URL=http://www.qcmMaker.int/
+
+  rp:
+    image: nginx:alpine
+    container_name: qcmMaker-rp
+    restart: always
+    ports:
+      - "80:80"
+      #- "443:443"
+    volumes:
+      - ./volumes/rp/conf.d/default.conf:/etc/nginx/conf.d/default.conf:ro
+      #- ./volumes/rp/ssl/www.qcmMaker.int.crt:/etc/ssl/certs/www.qcmMaker.int.crt:ro
+      #- ./volumes/rp/ssl/www.qcmMaker.int.key:/etc/ssl/private/www.qcmMaker.int.key:ro
+    environment:
+      - NGINX_HOST=www.qcmMaker.int

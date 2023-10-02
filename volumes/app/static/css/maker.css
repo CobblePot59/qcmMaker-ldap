@@ -1,0 +1,151 @@
+body {
+	font-family: Arial, sans-serif;
+	background-color: #f5f5f5;
+	margin: 0;
+	padding: 0;
+}
+
+form {
+	background-color: #fff;
+	padding: 20px;
+	border-radius: 5px;
+	margin: 20px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+	max-width: 900px;
+	margin: 20px auto;
+}
+
+div {
+	margin-bottom: 15px;
+}
+
+label {
+	display: block;
+	margin-bottom: 5px;
+}
+
+select,
+input[type="text"] {
+	width: 100%;
+	box-sizing: border-box;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	margin-bottom: 10px;
+}
+
+.question {
+	background-color: #f9f9f9;
+	padding: 10px;
+	border-radius: 3px;
+	margin-bottom: 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+
+.answers {
+	margin-top: 10px;
+	flex-direction: row;
+	align-items: center;
+}
+
+.answers div {
+	display: flex;
+	align-items: center;
+	margin-left: 10px;
+	align-items: baseline;
+}
+
+.answers div * {
+	margin-left: 10px;
+}
+
+
+.question-header {
+	flex-direction: row;
+	/* Ajustement pour mettre le numéro de la question et le label sur la même ligne */
+	align-items: center;
+	/* Ajustement pour aligner verticalement le numéro de la question et le label */
+	width: 100%;
+}
+
+.question-header input {
+	width: 80%;
+}
+
+.question-number {
+	margin-right: 10px;
+	/* Ajout d'une marge entre le numéro de la question et le label */
+}
+
+
+.answers .answer-label {
+	order: -1;
+	/* Ajustement pour mettre le label à l'extrême gauche */
+}
+
+.answers input[type="text"] {
+	flex: 1;
+	/* Ajustement pour permettre au champ de texte de prendre de l'espace */
+}
+
+.correct-answer,
+.remove-answer {
+	margin-left: auto;
+	/* Ajustement pour pousser ces éléments vers la droite */
+}
+
+
+
+.answers input[type="checkbox"],
+.answers input[type="radio"] {
+	margin-right: auto;
+	margin-left: 10px;
+}
+
+
+
+.button-container {
+	justify-content: space-between;
+	align-items: center;
+}
+
+button {
+	background-color: #333;
+	color: #fff;
+	border: none;
+	padding: 10px 15px;
+	cursor: pointer;
+	margin: 0 0 10px 0;
+}
+
+.dragging {
+	opacity: 0.5;
+}
+
+#generate-button {
+	margin-top: 20px;
+	background-color: #333;
+	color: #fff;
+	border: none;
+	padding: 10px 15px;
+	cursor: pointer;
+	width: 100%;
+}
+
+.text-answer {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	width: 100%;
+}
+
+.text-answer input {
+	width: 80%;
+}
+
+.text-answer label {
+	margin-bottom: 5px;
+}
