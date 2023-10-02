@@ -9,4 +9,4 @@ Create your own quizzes/surveys for your employees/students and collect the resu
 ![alt text](https://raw.githubusercontent.com/CobblePot59/qcmMaker-ldap/main/pictures/maker.jpg)
 
 ## User Results
-![alt text](https://raw.githubusercontent.com/CobblePot59/qcmMaker-ldap/main/pictures/scores.jpg)
+![alt text](https://raw.githubusercontent.com/CobblePot59/qcmMaker-ldap/main/pictures/user-scores.jpg)
