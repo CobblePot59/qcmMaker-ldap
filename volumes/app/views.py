@@ -42,6 +42,10 @@ def maker(category_name):
             return render_template('maker.html')
 
     quiz_name = request.form['quiz-name']
+    if not quiz_name.isalpha():
+        flash('Quiz name is invalid', 'error')
+        return redirect(url_for('maker', category_name=category_name))
+        
     quiz_name = f'{quiz_name}.html'
     if Quizzes.query.filter_by(name=quiz_name).first():
         flash(f'{quiz_name} already exist', 'error')
@@ -50,6 +54,10 @@ def maker(category_name):
     quiz_path = 'quiz/'
     htmlContent = request.form['quiz-html-data']
     quiz_data = request.form['quiz-json-data']
+
+    if not jquiz_data['questions']:
+        flash('Add at least one question before generating the quiz', 'error')
+        return redirect(url_for('maker', category_name=category_name))
 
     with open(quiz_path+quiz_name, 'w') as html_file:
         html_file.write(htmlContent)
@@ -74,10 +82,14 @@ def url_redirect(hid):
         if request.method == 'POST':
        
 
-            name = request.form['name'].lower().strip()
-            surname = request.form['surname'].lower().strip()
+            name = request.form['name'].lower()
+            surname = request.form['surname'].lower()
             username = f'{name[0]}{surname}'
 
+            if not name.isalpha() or not surname.isalpha():
+                flash('User is invalid', 'error')
+                return redirect(url_for('url_redirect', hid=hid))
+                
             user = Users.query.filter_by(username=username).first()
 
             if not user:
