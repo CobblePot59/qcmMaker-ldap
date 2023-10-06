@@ -14,6 +14,16 @@ $(document).ready(function () {
         // Prevent the default form submission behavior.
         event.preventDefault();
 
+        // Check if the quiz-name input is alphanumeric.
+        const quizNameInput = document.getElementById("quiz-name");
+        const quizNameValue = quizNameInput.value;
+        const alphanumericRegex = /^[a-zA-Z0-9\s]+$/;
+
+        if (!alphanumericRegex.test(quizNameValue)) {
+            alert("Quiz name must contain only alphanumeric characters.");
+            return;
+        }
+
         // Call your JavaScript function here.
         generateFile();
 
@@ -41,7 +51,7 @@ $(document).ready(function () {
                 <div class="question-header">
                     <div style="display:flex;">
                         <span class="question-number">${questionCounter}.</span>
-                        <label style="margin-left: 10px;">${questionText}</label>
+                        <label style="margin-left: 10px;">${questionText.trimLeft()}</label>
                     </div>
                     <input type="text" placeholder="Question" required>
                     <button type="button" class="add-answer">Add an answer</button>
@@ -49,10 +59,10 @@ $(document).ready(function () {
                 <div class="answers"></div>
                 <a href="#" class="remove-question"><i class="bi bi-trash" style="color: red;"></i></a>
             `;
-            
+
             const answersContainer = questionElement.querySelector(".answers");
 
-            const addAnswerButton = questionElement.querySelector(".add-answer");         
+            const addAnswerButton = questionElement.querySelector(".add-answer");
             addAnswerButton.addEventListener("click", addAnswer);
 
             function addAnswer() {
@@ -133,8 +143,8 @@ $(document).ready(function () {
                 });
             });
 
-            questionsContainer.addEventListener('dragover', e => {
-                e.preventDefault();
+            questionsContainer.addEventListener('dragover', event => {
+                event.preventDefault();
                 const afterElement = getDragAfterElement(questionsContainer, e.clientY);
                 const draggable = document.querySelector('.dragging');
                 if (afterElement == null) {
@@ -164,10 +174,6 @@ $(document).ready(function () {
     // Function to generate a JSON and HTML file with question and answer.
     function generateFile() {
         const questions = document.querySelectorAll('.question');
-        if (questions.length === 0) {
-            alert("Add question before generate quiz.");
-            return;
-        }
 
         // Function to create the quiz JSON data.
         function createQuizJSON() {
@@ -180,23 +186,24 @@ $(document).ready(function () {
                 const type = question.getAttribute('data-type');
                 let questionData = {
                     'type': type,
-                    'question': questionText,
+                    'question': questionText.trimLeft(),
                     'answers': []
                 };
 
                 if (type === 'text') {
                     const correctAnswer = question.querySelector('.text-answer input').value;
                     questionData.answers.push({
-                        'answer': correctAnswer,
+                        'answer': correctAnswer.trimLeft(),
                         'isCorrect': true
                     });
                 } else {
                     const answers = question.querySelectorAll('.answers div');
                     answers.forEach((answer, answerIndex) => {
+
                         const answerText = answer.querySelector('input[type="text"]').value;
                         const isCorrect = answer.querySelector('input[type="radio"], input[type="checkbox"]').checked;
                         questionData.answers.push({
-                            'answer': answerText,
+                            'answer': answerText.trimLeft(),
                             'isCorrect': isCorrect
                         });
                     });
@@ -232,7 +239,7 @@ $(document).ready(function () {
                 const type = question.getAttribute('data-type');
                 htmlContent += `
                     <div class="question" data-type="${type}">
-                        <div class="question-header">${index + 1}. ${questionText}</div>
+                        <div class="question-header">${index + 1}. ${questionText.trimLeft()}</div>
                 `;
 
                 if (type === 'text') {
@@ -249,8 +256,8 @@ $(document).ready(function () {
                         htmlContent += `
                             <div>
                                 <label>
-                                    <input type="${type === 'unique' ? 'radio' : 'checkbox'}" name="question-${index}-answers" value="${answerText}">
-                                    ${answerText}
+                                    <input type="${type === 'unique' ? 'radio' : 'checkbox'}" name="question-${index}-answers" value="${answerText.trimLeft()}">
+                                    ${answerText.trimLeft()}
                                 </label>
                             </div>
                         `;
